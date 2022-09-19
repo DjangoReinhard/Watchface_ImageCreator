@@ -95,6 +95,29 @@ QString WatchFace::id(int elem) const {
   }
 
 
+void WatchFace::loadFace(const QString &fileName) {
+  QSettings config(fileName, QSettings::IniFormat);
+
+  for (int i=0; i < WatchFace::MaxElements; ++i) {
+      ElementInfo* c = elemInfo(i);
+
+      config.beginGroup(c->id);
+
+      qDebug() << "read settings from group" << config.group();
+
+      c->x = config.value("x").toInt();
+      c->y = config.value("y").toInt();
+      c->rotation = config.value("rot").toDouble();
+      c->path = config.value("path").toString();
+      c->font = config.value("font").value<QFont>();
+      c->fgCol0 = config.value("fg0").value<QColor>();
+      c->fgCol1 = config.value("fg1").value<QColor>();
+      c->bgColor = config.value("bg").value<QColor>();
+      config.endGroup();
+      }
+  }
+
+
 int WatchFace::rotation(int elem) const {
   if (elem < 0 || elem >= MaxElements) return 0;
   return cfg[elem].rotation;
@@ -169,7 +192,8 @@ void WatchFace::setSample(int elem, const QString &text) {
 
 
 void WatchFace::setupDefaults(const QString& symbolBase) {
-  cfg[ 0].id = tr("background");
+  cfg[ 0].id = "background";
+  cfg[ 0].name = tr("background");
   cfg[ 0].sample = "background";
   cfg[ 0].path = "background";
   cfg[ 0].x = 0;
@@ -182,7 +206,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 0].fgCol0  = Qt::black;
   cfg[ 0].fgCol1  = Qt::black;
 
-  cfg[ 1].id = tr("left hour");
+  cfg[ 1].id = "left hour";
+  cfg[ 1].name = tr("left hour");
   cfg[ 1].sample = "0";
   cfg[ 1].path = "hour/left";
   cfg[ 1].x = 7;
@@ -195,7 +220,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 1].fgCol0  = Qt::white;
   cfg[ 1].fgCol1  = Qt::red;
 
-  cfg[ 2].id = tr("right hour");
+  cfg[ 2].id = "right hour";
+  cfg[ 2].name = tr("right hour");
   cfg[ 2].sample = "8";
   cfg[ 2].path = "hour/right";
   cfg[ 2].x = 0;
@@ -208,7 +234,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 2].fgCol0  = Qt::white;
   cfg[ 2].fgCol1  = Qt::white;
 
-  cfg[ 3].id = tr("left minute");
+  cfg[ 3].id = "left minute";
+  cfg[ 3].name = tr("left minute");
   cfg[ 3].sample = "5";
   cfg[ 3].path = "minute/left";
   cfg[ 3].x = 0;
@@ -221,7 +248,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 3].fgCol0  = Qt::white;
   cfg[ 3].fgCol1  = Qt::white;
 
-  cfg[ 4].id = tr("right minute");
+  cfg[ 4].id = "right minute";
+  cfg[ 4].name = tr("right minute");
   cfg[ 4].sample = "9";
   cfg[ 4].path = "minute/right";
   cfg[ 4].x = 0;
@@ -234,7 +262,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 4].fgCol0  = Qt::white;
   cfg[ 4].fgCol1  = Qt::white;
 
-  cfg[ 5].id = tr("left day of month");
+  cfg[ 5].id = "left day of month";
+  cfg[ 5].name = tr("left day of month");
   cfg[ 5].sample = "2";
   cfg[ 5].path = "dom/left";
   cfg[ 5].x = 0;
@@ -247,7 +276,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 5].fgCol0  = Qt::white;
   cfg[ 5].fgCol1  = Qt::white;
 
-  cfg[ 6].id = tr("right day of month");
+  cfg[ 6].id = "right day of month";
+  cfg[ 6].name = tr("right day of month");
   cfg[ 6].sample = "9";
   cfg[ 6].path = "dom/right";
   cfg[ 6].x = 0;
@@ -260,7 +290,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 6].fgCol0  = Qt::white;
   cfg[ 6].fgCol1  = Qt::white;
 
-  cfg[ 7].id = tr("month");
+  cfg[ 7].id = "month";
+  cfg[ 7].name = tr("month");
   cfg[ 7].sample = "7;4";
   cfg[ 7].path = "month";
   cfg[ 7].x = 0;
@@ -273,7 +304,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 7].fgCol0  = Qt::white;
   cfg[ 7].fgCol1  = Qt::white;
 
-  cfg[ 8].id = tr("day of week");
+  cfg[ 8].id = "day of week";
+  cfg[ 8].name = tr("day of week");
   cfg[ 8].sample = "4;4";
   cfg[ 8].path = "week";
   cfg[ 8].x = 0;
@@ -286,7 +318,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 8].fgCol0  = Qt::white;
   cfg[ 8].fgCol1  = Qt::white;
 
-  cfg[ 9].id = tr("temperature");
+  cfg[ 9].id = "temperature";
+  cfg[ 9].name = tr("temperature");
   cfg[ 9].sample = "23°";
   cfg[ 9].path = "temperature";
   cfg[ 9].x = 0;
@@ -299,7 +332,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[ 9].fgCol0  = Qt::white;
   cfg[ 9].fgCol1  = Qt::white;
 
-  cfg[10].id = tr("power");
+  cfg[10].id = "power";
+  cfg[10].name = tr("power");
   cfg[10].sample = "95%";
   cfg[10].path = "power";
   cfg[10].x = 0;
@@ -312,7 +346,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[10].fgCol0  = QColor(0, 255, 0);
   cfg[10].fgCol1  = QColor(0, 255, 0, 110);
 
-  cfg[11].id = tr("steps");
+  cfg[11].id = "steps";
+  cfg[11].name = tr("steps");
   cfg[11].sample = "5381";
   cfg[11].path = "steps";
   cfg[11].x = 0;
@@ -325,7 +360,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[11].fgCol0  = QColor(255, 170, 0);
   cfg[11].fgCol1  = QColor(255, 170, 110, 110);
 
-  cfg[12].id = tr("pulse");
+  cfg[12].id = "pulse";
+  cfg[12].name = tr("pulse");
   cfg[12].sample = "107";
   cfg[12].path = "pulse";
   cfg[12].x = 0;
@@ -338,7 +374,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[12].fgCol0  = Qt::white;
   cfg[12].fgCol1  = Qt::white;
 
-  cfg[13].id = tr("calories");
+  cfg[13].id = "calories";
+  cfg[13].name = tr("calories");
   cfg[13].sample = "213";
   cfg[13].path = "calories";
   cfg[13].x = 0;
@@ -351,7 +388,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[13].fgCol0  = Qt::white;
   cfg[13].fgCol1  = Qt::white;
 
-  cfg[14].id = tr("rain");
+  cfg[14].id = "rain";
+  cfg[14].name = tr("rain");
   cfg[14].sample = "55";
   cfg[14].path = "rain";
   cfg[14].x = 0;
@@ -364,7 +402,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[14].fgCol0  = Qt::white;
   cfg[14].fgCol1  = Qt::white;
 
-  cfg[15].id = tr("symbol power");
+  cfg[15].id = "symbol power";
+  cfg[15].name = tr("symbol power");
   cfg[15].sample = "power";
   cfg[15].path = symbolBase + "/other_symbols/";
   cfg[15].x = 0;
@@ -377,7 +416,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[15].fgCol0  = Qt::white;
   cfg[15].fgCol1  = Qt::black;
 
-  cfg[16].id = tr("symbol steps");
+  cfg[16].id = "symbol steps";
+  cfg[16].name = tr("symbol steps");
   cfg[16].sample = "steps";
   cfg[16].path = symbolBase + "/other_symbols/";
   cfg[16].x = 0;
@@ -390,7 +430,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[16].fgCol0  = Qt::white;
   cfg[16].fgCol1  = Qt::black;
 
-  cfg[17].id = tr("symbol pulse");
+  cfg[17].id = "symbol pulse";
+  cfg[17].name = tr("symbol pulse");
   cfg[17].sample = "heart";
   cfg[17].path = symbolBase + "/other_symbols/";
   cfg[17].x = 0;
@@ -403,7 +444,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[17].fgCol0  = Qt::white;
   cfg[17].fgCol1  = Qt::white;
 
-  cfg[18].id = tr("symbol calories");
+  cfg[18].id = "symbol calories";
+  cfg[18].name = tr("symbol calories");
   cfg[18].sample = "drain";
   cfg[18].path = symbolBase + "/other_symbols/";
   cfg[18].x = 0;
@@ -416,7 +458,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[18].fgCol0  = Qt::white;
   cfg[18].fgCol1  = Qt::white;
 
-  cfg[19].id = tr("symbol rain");
+  cfg[19].id = "symbol rain";
+  cfg[19].name = tr("symbol rain");
   cfg[19].sample = "rain";
   cfg[19].path = symbolBase + "/other_symbols/";
   cfg[19].x = 0;
@@ -429,7 +472,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[19].fgCol0  = Qt::white;
   cfg[19].fgCol1  = Qt::white;
 
-  cfg[20].id = tr("symbol weather");
+  cfg[20].id = "symbol weather";
+  cfg[20].name = tr("symbol weather");
   cfg[20].sample = "03";
   cfg[20].path = symbolBase + "/weather_symbols/";
   cfg[20].x = 0;
@@ -442,7 +486,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[20].fgCol0  = Qt::white;
   cfg[20].fgCol1  = Qt::black;
 
-  cfg[21].id = tr("gauge power");
+  cfg[21].id = "gauge power";
+  cfg[21].name = tr("gauge power");
   cfg[21].sample = "95";
   cfg[21].path = "gauge/top";
   cfg[21].x = 0;
@@ -455,7 +500,8 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[21].fgCol0  = QColor(0, 255, 0,  90);
   cfg[21].fgCol1  = QColor(0, 255, 0, 255);
 
-  cfg[22].id = tr("gauge steps");
+  cfg[22].id = "gauge steps";
+  cfg[22].name = tr("gauge steps");
   cfg[22].sample = "77";
   cfg[22].path = "gauge/bottom";
   cfg[22].x = 0;
@@ -469,7 +515,7 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
   cfg[22].fgCol1  = QColor(255, 170, 0, 255);
 
   for (int i=0; i < MaxElements; ++i) {
-      en << cfg[i].id;
+      en << cfg[i].name;
       }
   }
 

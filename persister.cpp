@@ -84,9 +84,9 @@ void Persister::storeTextSequence(const QString& baseDir, const ElementInfo* cfg
   if (parts.size() > 1) l = parts.at(1).toInt();
 
   // first localized texts
-  if (cfg->id == tr("month"))
+  if (cfg->id == "month")
      sl = wf->lMonths;
-  else if (cfg->id == tr("day of week"))
+  else if (cfg->id == "day of week")
      sl = wf->lDows;
 
   for (int i=0; i < sl.size(); ++i) {
@@ -103,9 +103,9 @@ void Persister::storeTextSequence(const QString& baseDir, const ElementInfo* cfg
       }
 
   // now the original texts
-  if (cfg->id == tr("month"))
+  if (cfg->id == "month")
      sl = wf->months;
-  else if (cfg->id == tr("day of week"))
+  else if (cfg->id == "day of week")
      sl = wf->dows;
 
   for (int i=0; i < sl.size(); ++i) {

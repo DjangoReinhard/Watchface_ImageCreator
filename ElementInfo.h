@@ -21,6 +21,7 @@ enum ElemType {
 typedef struct
 {
   QString       id;
+  QString       name;
   QString       path;
   int           x;
   int           y;

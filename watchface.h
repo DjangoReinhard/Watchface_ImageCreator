@@ -12,6 +12,7 @@ public:
 
   QStringList elementNames() const { return en; };
   const ElementInfo* elementInfo(int elem) const;
+  void    loadFace(const QString& fileName);
   int     width()  const { return w; };
   int     height() const { return h; };
   QColor  bgColor(int elem) const;

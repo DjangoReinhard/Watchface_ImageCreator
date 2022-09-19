@@ -163,30 +163,15 @@ void MainWindow::openFile() {
                                                 , tr("Text files (*.txt)"));
 
   if (fileName.isEmpty()) return;
-  qDebug() << "got filename:" << fileName;
-  QSettings config(fileName, QSettings::IniFormat);
   QFileInfo fi(fileName);
   QDir faceDir(fi.absoluteDir());
 
+  qDebug() << "got filename:" << fileName;
+
   ib->setFaceDir(faceDir.path());
-  for (int i=0; i < WatchFace::MaxElements; ++i) {
-      QString group = wf->elementNames().at(i);
-      config.beginGroup(group);
-
-      qDebug() << "read settings from group" << config.group();
-
-      wf->setX(i, config.value("x").toInt());
-      wf->setY(i, config.value("y").toInt());
-      wf->setRotation(i, config.value("rot").toDouble());
-      wf->setPath(i, config.value("path").toString());
-      wf->setFont(i, config.value("font").value<QFont>());
-      wf->setForeground0(i, config.value("fg0").value<QColor>());
-      wf->setForeground1(i, config.value("fg1").value<QColor>());
-      wf->setBackground(i, config.value("bg").value<QColor>());
-      config.endGroup();
-
+  wf->loadFace(fileName);
+  for (int i=0; i < WatchFace::MaxElements; ++i)
       ib->createElement(i);
-      }
   ui->gFace->setEnabled(true);
   ui->gProperties->setEnabled(true);
   ui->gSliders->setEnabled(true);  
