@@ -11,11 +11,11 @@ int main(int argc, char *argv[]) {
   QStringList uiLanguages = QLocale::system().uiLanguages();
   const QString symbolBase = "/home/django/misc/mi.watchface/Band7";
 
-  for (const QString& locale : uiLanguages) {
-      qDebug() << "got ui-language: >>" << QLocale(locale).name() << "<<";
-      }
-  if (!uiLanguages.contains("de") || !uiLanguages.contains("de_DE"))
-     uiLanguages.append("de");
+//  for (const QString& locale : uiLanguages) {
+//      qDebug() << "got ui-language: >>" << QLocale(locale).name() << "<<";
+//      }
+//  if (!uiLanguages.contains("de") || !uiLanguages.contains("de_DE"))
+//     uiLanguages.append("de");
   for (const QString& locale : uiLanguages) {
       const QString baseName = "FaceBuilder_" + QLocale(locale).name();
 
