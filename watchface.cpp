@@ -100,15 +100,16 @@ void WatchFace::loadFace(const QString &fileName) {
 
   for (int i=0; i < WatchFace::MaxElements; ++i) {
       ElementInfo* c = elemInfo(i);
+      QString      np;
 
       config.beginGroup(c->id);
-
       qDebug() << "read settings from group" << config.group();
 
       c->x = config.value("x").toInt();
       c->y = config.value("y").toInt();
       c->rotation = config.value("rot").toDouble();
-      c->path = config.value("path").toString();
+      np = config.value("path").toString();
+      if (!(np.isNull() || np.isEmpty())) c->path = np;
       c->font = config.value("font").value<QFont>();
       c->fgCol0 = config.value("fg0").value<QColor>();
       c->fgCol1 = config.value("fg1").value<QColor>();
@@ -128,15 +129,17 @@ void WatchFace::save(const QString &fileName) {
   QSettings config(fileName, QSettings::IniFormat);
 
   for (int i=0; i < MaxElements; ++i) {
-      config.beginGroup(en[i]);
-      config.setValue("x",    cfg[i].x);
-      config.setValue("y",    cfg[i].y);
-      config.setValue("rot",  cfg[i].rotation);
-      config.setValue("path", cfg[i].path);
-      config.setValue("font", cfg[i].font);
-      config.setValue("fg0",  cfg[i].fgCol0);
-      config.setValue("fg1",  cfg[i].fgCol1);
-      config.setValue("bg",   cfg[i].bgColor);
+      const ElementInfo* c = elementInfo(i);
+
+      config.beginGroup(c->id);
+      config.setValue("x",    c->x);
+      config.setValue("y",    c->y);
+      config.setValue("rot",  c->rotation);
+      config.setValue("path", c->path);
+      config.setValue("font", c->font);
+      config.setValue("fg0",  c->fgCol0);
+      config.setValue("fg1",  c->fgCol1);
+      config.setValue("bg",   c->bgColor);
       config.endGroup();
       }
   config.sync();
@@ -320,7 +323,7 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
 
   cfg[ 9].id = "temperature";
   cfg[ 9].name = tr("temperature");
-  cfg[ 9].sample = "23°";
+  cfg[ 9].sample = "-23°";
   cfg[ 9].path = "temperature";
   cfg[ 9].x = 0;
   cfg[ 9].y = 0;
@@ -446,7 +449,7 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
 
   cfg[18].id = "symbol calories";
   cfg[18].name = tr("symbol calories");
-  cfg[18].sample = "drain";
+  cfg[18].sample = "fire";
   cfg[18].path = symbolBase + "/other_symbols/";
   cfg[18].x = 0;
   cfg[18].y = 0;
@@ -474,7 +477,7 @@ void WatchFace::setupDefaults(const QString& symbolBase) {
 
   cfg[20].id = "symbol weather";
   cfg[20].name = tr("symbol weather");
-  cfg[20].sample = "03";
+  cfg[20].sample = "07";
   cfg[20].path = symbolBase + "/weather_symbols/";
   cfg[20].x = 0;
   cfg[20].y = 0;

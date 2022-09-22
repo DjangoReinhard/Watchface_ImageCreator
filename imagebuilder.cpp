@@ -99,9 +99,9 @@ void ImageBuilder::createElement(int elem, ElementInfo* cfg) {
     case TextSequence: {
          QStringList sl;
 
-         if (cfg->path == "month")
+         if (cfg->id == "month")
             sl = wf->lMonths;
-         else if (cfg->path == "week")
+         else if (cfg->id == "day of week")
             sl = wf->lDows;
          cfg->image = createImage(cfg, getSampleText(cfg->sample, sl));
          } break;
@@ -257,6 +257,11 @@ void ImageBuilder::drawImage(QImage& img, const ElementInfo* cfg, QPainterPath& 
      p.drawPath(pp);
      p.end();
      }
+  }
+
+
+QString ImageBuilder::getFaceDir() const {
+  return base;
   }
 
 

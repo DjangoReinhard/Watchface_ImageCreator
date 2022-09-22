@@ -9,13 +9,13 @@ int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   QTranslator translator;
   QStringList uiLanguages = QLocale::system().uiLanguages();
-  const QString symbolBase = "/home/django/misc/mi.watchface/Band7";
+  QString     symbolBase;
 
-//  for (const QString& locale : uiLanguages) {
-//      qDebug() << "got ui-language: >>" << QLocale(locale).name() << "<<";
-//      }
-//  if (!uiLanguages.contains("de") || !uiLanguages.contains("de_DE"))
-//     uiLanguages.append("de");
+  for (int i=1; i < argc; ++i) {
+      if (QString(argv[i]) == "-symbols" && argc > (i+1)) {
+         symbolBase = QString(argv[++i]);
+         }
+      }
   for (const QString& locale : uiLanguages) {
       const QString baseName = "FaceBuilder_" + QLocale(locale).name();
 

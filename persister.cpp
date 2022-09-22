@@ -15,6 +15,7 @@ Persister::Persister(WatchFace* face, ImageBuilder* ib, const QString& symbolBas
  , symbolBase(symbolBase) {
   this->nameOf[0260] = "degree";
   this->nameOf['%']  = "percent";
+  this->nameOf['-']  = "minus";
   }
 
 
@@ -27,28 +28,31 @@ QString Persister::getSampleText(int n, int l, const QStringList& list) {
   }
 
 
-void Persister::storeImages(const QString& baseDir) {
+void Persister::storeImages(const QString& faceDir, const QString& oldFaceDir) {
   for (int i=0; i < WatchFace::MaxElements; ++i) {
       const ElementInfo* cfg = wf->elementInfo(i);
 
       switch (cfg->type) {
         case Background:
-             storeImage(baseDir, cfg);
+             storeImage(faceDir, cfg);
              break;
         case TextSequence:
-             storeTextSequence(baseDir, cfg);
+             storeTextSequence(faceDir, cfg);
              break;
         case SingleDigit:
-             storeNumSequence(baseDir, cfg);
+             storeNumSequence(faceDir, cfg);
              break;
         case FreeText:
-             storeFreeText(baseDir, cfg);
+             storeFreeText(faceDir, cfg);
              break;
         case Symbol:
-             storeSymbol(baseDir, symbolBase, wf->elemInfo(i));
+             if (cfg->id == "symbol weather")
+                storeWeatherSymbols(faceDir, symbolBase, oldFaceDir, wf->elemInfo(i));
+             else
+                storeSymbol(faceDir, symbolBase, oldFaceDir, wf->elemInfo(i));
              break;
         case Gauge:
-             storeGauge(baseDir, wf->elemInfo(i));
+             storeGauge(faceDir, wf->elemInfo(i));
              break;
         default:
              break;
@@ -185,26 +189,62 @@ void Persister::storeFreeText(const QString& baseDir, const ElementInfo* cfg) {
   }
 
 
-void Persister::storeSymbol(const QString& baseDir, const QString& symbolBase, ElementInfo* cfg) {
+void Persister::storeSymbol(const QString& faceDir, const QString& symbolBase, const QString& oldFaceDir, ElementInfo* cfg) {
   if (!cfg) return;
-  QString fileName = cfg->path + cfg->sample + ".png";
+  QString relPath = cfg->path;
+  QString source;
 
-  // only need a copy if symbol is imported from outside (by using symbolBase)
-  if (cfg->path.startsWith(symbolBase)) {
-     QString path = cfg->path.mid(symbolBase.size()).remove("/");
-     QString dFN  = QString("%1/%2/%3.png").arg(baseDir)
-                                           .arg(path)
-                                           .arg(cfg->sample);
-     QDir    dir;
+  if (cfg->path.startsWith("/")) {
+     source  = cfg->path + "/" + cfg->sample + ".png";
+     relPath = cfg->path.mid(symbolBase.size()).remove("/");
+     }
+  else
+     source = QString("%1/%2/%3.png").arg(oldFaceDir, relPath, cfg->sample);
+  QString dest = QString("%1/%2/%3.png").arg(faceDir, relPath, cfg->sample);
 
-     qDebug() << "filename is" << dFN;
+  qDebug() << "storeSymbol - relPath:" << relPath << "source:" << source << "dest:" << dest;
+  if (dest != source) {
+     QDir dir;
 
-     dir.mkpath(baseDir + "/" + path);
-     cfg->path = path;
-     QFile::remove(dFN);
-     if (!QFile::copy(fileName, dFN)) {
-        qDebug() << "OUPS, failed to copy symbol to >|" << dFN << "|<";
+     dir.mkpath(faceDir + "/" + relPath);
+     cfg->path = relPath;
+     QFile::remove(dest);
+     if (!QFile::copy(source, dest)) {
+        qDebug() << "OUPS, failed to copy" << source << "(symbol) to >|" << dest << "|<";
         }
+     }
+  }
+
+
+void Persister::storeWeatherSymbols(const QString& faceDir, const QString& symbolBase, const QString& oldFaceDir, ElementInfo* cfg) {
+  if (!cfg) return;
+  QString srcDir  = oldFaceDir;
+  QString relPath = cfg->path;
+
+  if (cfg->path.startsWith("/")) {
+     srcDir  = cfg->path;
+     relPath = cfg->path.mid(symbolBase.size()).remove("/");
+     }
+  else
+     srcDir = QString("%1/%2").arg(oldFaceDir, relPath);
+  QString dstDir = QString("%1/%2").arg(faceDir, relPath);
+
+  if (dstDir != srcDir) {
+     QDir dir;
+
+     dir.mkpath(faceDir + "/" + relPath);
+     cfg->path = relPath;
+     for (int i=0; i < 29; ++i) {
+         QString src = srcDir + QString("/%1.png").arg(i, 2, 10, QChar('0'));
+         QString dst = dstDir + QString("/%1.png").arg(i, 2, 10, QChar('0'));
+
+         qDebug() << "copy weather symbol from" << src << "to" << dst;
+
+         QFile::remove(dst);
+         if (!QFile::copy(src, dst)) {
+            qDebug() << "OUPS, failed to copy" << src << "(weather-symbol) to >|" << dst << "|<";
+            }
+         }
      }
   }
 
@@ -214,10 +254,11 @@ void Persister::storeGauge(const QString& baseDir, ElementInfo* cfg) {
   double stepSize = 100.0 / (double)(cfg->max);
   void (ImageBuilder::*func)(QImage& i, ElementInfo* cfg, int s, const QColor& c);
   QDir dir;
+  int  i;
 
   if (cfg->path.endsWith("top")) func = &ImageBuilder::createGaugeI;
   else                           func = &ImageBuilder::createGaugeII;
-  for (int i=0; i < cfg->max; ++i) {
+  for (i=0; i < cfg->max; ++i) {
       QImage  scratch(wf->width(), wf->height(), QImage::Format_ARGB32);
       QString fn = baseDir + "/" + cfg->path + QString("/%1.png").arg(i);
       int     n  = (int)((double)i * stepSize);
@@ -232,5 +273,16 @@ void Persister::storeGauge(const QString& baseDir, ElementInfo* cfg) {
          qDebug() << "OUPS, failed to save image to file >|" << fn << "|<";
          }
       }
+  QImage  scratch(wf->width(), wf->height(), QImage::Format_ARGB32);
+  QString fn = baseDir + "/" + cfg->path + QString("/%1.png").arg(i);
+
+  qDebug() << "filename is" << fn;
+
+  (ib->*(func))(scratch, cfg, 100, cfg->fgCol1);
+  dir.mkpath(baseDir + "/" + cfg->path);
+  QFile::remove(fn);
+  if (!scratch.save(fn, "PNG")) {
+     qDebug() << "OUPS, failed to save image to file >|" << fn << "|<";
+     }
   }
 

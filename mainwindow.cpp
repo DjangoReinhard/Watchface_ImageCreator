@@ -220,7 +220,7 @@ void MainWindow::save() {
                                                     , tr("Save Preview")
                                                     , "/media/Scratch");
 
-  pers->storeImages(faceDir);
+  pers->storeImages(faceDir, ib->getFaceDir());
   QString fileName = faceDir + "/watchface-pre.txt";
 
   wf->save(fileName);

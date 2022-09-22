@@ -25,6 +25,7 @@ public:
   QImage  createImage(const ElementInfo* cfg, const QString& text);
   void    drawGauge(QImage& img, ElementInfo* cfg, QPainterPath& pp, const QColor& c);
   void    drawImage(QImage& img, const ElementInfo* cfg, QPainterPath& pp);
+  QString getFaceDir() const;
   QString getSampleText(const QString& sample, QStringList& list);
   QImage  refresh(ElementInfo* cfg);
   void    setFaceDir(const QString& basePath);

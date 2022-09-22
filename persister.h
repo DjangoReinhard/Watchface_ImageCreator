@@ -13,7 +13,7 @@ class Persister : public QObject
 public:
   Persister(WatchFace* face, ImageBuilder* ib, const QString& symbolBase, QObject* parent = nullptr);
 
-  void    storeImages(const QString& faceDir);
+  void    storeImages(const QString& faceDir, const QString& oldFaceDir);
 
 protected:
   QString getSampleText(int n, int l, const QStringList& list);
@@ -21,7 +21,8 @@ protected:
   void    storeTextSequence(const QString& baseDir, const ElementInfo* cfg);
   void    storeNumSequence(const QString& baseDir, const ElementInfo* cfg);
   void    storeFreeText(const QString& baseDir, const ElementInfo* cfg);
-  void    storeSymbol(const QString& baseDir, const QString& symbolBase, ElementInfo* cfg);
+  void    storeSymbol(const QString& baseDir, const QString& symbolBase, const QString& oldFaceDir, ElementInfo* cfg);
+  void    storeWeatherSymbols(const QString& baseDir, const QString& symbolBase, const QString& oldFaceDir, ElementInfo* cfg);
   void    storeGauge(const QString& baseDir, ElementInfo* cfg);
 
 private:
