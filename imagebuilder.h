@@ -29,6 +29,7 @@ public:
   QString getSampleText(const QString& sample, QStringList& list);
   QImage  refresh(ElementInfo* cfg);
   void    setFaceDir(const QString& basePath);
+  QImage  testDigit();
 
 private:
   WatchFace*  wf;

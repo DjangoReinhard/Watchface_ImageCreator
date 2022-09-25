@@ -24,7 +24,7 @@
 MainWindow::MainWindow(const QString& symbolBase, QWidget *parent)
  : QMainWindow(parent)
  , ui(new Ui::MainWindow)
- , wf(new WatchFace(190, 490, symbolBase, this))
+ , wf(new WatchFace(192, 490, symbolBase, this))
  , ib(new ImageBuilder(wf, symbolBase, "/dev/null"))
  , pers(new Persister(wf, ib, symbolBase, this))
  , symbolBase(symbolBase)
@@ -58,7 +58,7 @@ MainWindow::MainWindow(const QString& symbolBase, QWidget *parent)
   connect(ui->spAngle, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::angleChanged);
   connect(ui->edSample, &QLineEdit::textChanged, this, &MainWindow::sampleChanged);
   //TODO:
-//  connect(ui->actionTest, &QAction::triggered, this, &MainWindow::test);
+  connect(ui->actionTest_2, &QAction::triggered, this, &MainWindow::test);
   }
 
 
@@ -337,30 +337,14 @@ void MainWindow::test() {
 //      scratch.save(QString("rednose_%1.png").arg(i), "PNG");
 //      }
 #else
-//  ib->createBackground();
-//  ib->buildPower(wf->elemInfo(21));
-//  ib->buildSteps(wf->elemInfo(22));
+  ui->gFace->setEnabled(true);
+  ui->gProperties->setEnabled(true);
+//  ui->gSliders->setEnabled(true);
+  ui->cbElement->setEnabled(true);
+  QImage scratch = ib->testDigit();
 
-//  QImage   scratch(190, 490, QImage::Format_ARGB32);
-//  QPainter p;
-
-//  if (p.begin(&scratch)) {
-//     p.setRenderHint(QPainter::Antialiasing);
-//     p.setCompositionMode(QPainter::CompositionMode_Source);
-//     p.fillRect(scratch.rect(), Qt::transparent);
-//     p.setCompositionMode(QPainter::CompositionMode_SourceOver);
-
-//     ElementInfo* cfg = wf->elemInfo(0);
-
-//     p.drawImage(0, 0, cfg->image);
-//     cfg = wf->elemInfo(21);
-//     p.drawImage(0, 0, cfg->image);
-//     cfg = wf->elemInfo(22);
-//     p.drawImage(0, 0, cfg->image);
-//     p.end();
-//     }
-//  ui->label->setPixmap(QPixmap::fromImage(scratch));
-//  update();
+  ui->label->setPixmap(QPixmap::fromImage(scratch));
+  update();
 #endif
   }
 

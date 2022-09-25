@@ -209,14 +209,19 @@ QImage ImageBuilder::createImage(const ElementInfo* cfg, const QString& text) {
   if (!cfg) throw new std::invalid_argument("missing cfg parameter");
   QFont        font = cfg->font;
   QFontMetrics fm(font);
-  QRect        r = fm.boundingRect(text);
-  QImage       scratch(10 + (int)((double)r.width() * 1.3)
+  QRect        r = text.size() == 1 ? fm.boundingRect("4") : fm.boundingRect(text);
+  QImage       scratch(10 + (int)((double)r.width() * 1.2)
                      , 10 + r.height()
                      , QImage::Format_ARGB32);
   if (cfg) {
      QPainterPath pp;
+     QSize s = scratch.size();
 
-     pp.addText(QPointF(10 - r.x(), -r.y() + 3), font, text);
+     qDebug() << "ImageBuilder::createImage( " << text << " )";
+     qDebug() << "  fontMetrics:" << r.x() << "/" << r.y() << " - " << r.width() << "x" << r.height();
+     qDebug() << "   image size:" << s.width() << "x" << s.height();
+
+     pp.addText(QPointF(5 - r.x(), -r.y() + 5), font, text);
      drawImage(scratch, cfg, pp);
      }
   return scratch;
@@ -246,7 +251,7 @@ void ImageBuilder::drawImage(QImage& img, const ElementInfo* cfg, QPainterPath& 
   if (p.begin(&img)) {
      p.setRenderHint(QPainter::Antialiasing);
      p.setCompositionMode(QPainter::CompositionMode_Source);
-     p.fillRect(img.rect(), Qt::transparent);
+     p.fillRect(img.rect(), cfg->bgColor);
      p.setCompositionMode(QPainter::CompositionMode_SourceOver);
      QLinearGradient gradient(0, 0, 0, img.height() * 1.3);
 
@@ -281,4 +286,34 @@ QString ImageBuilder::getSampleText(const QString& sample, QStringList& list) {
 
 void ImageBuilder::setFaceDir(const QString &basePath) {
   base = basePath;
+  }
+
+
+QImage ImageBuilder::testDigit() {
+  ElementInfo* cfg = wf->elemInfo(3); // function param
+
+  if (!cfg) throw new std::invalid_argument("missing cfg parameter");
+  QImage scratch;
+
+  for (int i=0; i < 10; ++i) {
+      QString text = QString("%1").arg(i);
+      QFont        font = cfg->font;
+      QFontMetrics fm(font);
+      QRect        r = text.size() == 1 ? fm.boundingRect("4") : fm.boundingRect(text);
+
+      scratch = QImage(10 + r.width() * 1.2, 10 + r.height(), QImage::Format_ARGB32);
+      if (cfg) {
+         QPainterPath pp;
+         QSize s = scratch.size();
+
+         qDebug() << "ImageBuilder::createImage( " << text << " )";
+         qDebug() << "  fontMetrics:" << r.x() << "/" << r.y() << " - " << r.width() << "x" << r.height();
+         qDebug() << "   image size:" << s.width() << "x" << s.height();
+
+         pp.addText(QPointF(5 - r.x(), -r.y() + 5), font, text);
+         drawImage(scratch, cfg, pp);
+         }
+      scratch.save(QString("/media/Scratch/Blah/%1.png").arg(i), "PNG");
+      }
+  return scratch;
   }

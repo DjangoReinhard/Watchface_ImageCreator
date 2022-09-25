@@ -28,7 +28,8 @@ FORMS += \
     mainwindow.ui
 
 TRANSLATIONS += \
-    i18n/FaceBuilder_de_DE.ts
+    i18n/FaceBuilder_de_DE.ts \
+    i18n/FaceBuilder_uk_UA.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 

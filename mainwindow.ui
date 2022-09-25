@@ -375,6 +375,7 @@
     <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
+    <addaction name="actionTest_2"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -402,6 +403,11 @@
   <action name="actionNew">
    <property name="text">
     <string>New</string>
+   </property>
+  </action>
+  <action name="actionTest_2">
+   <property name="text">
+    <string>Test</string>
    </property>
   </action>
  </widget>

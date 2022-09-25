@@ -85,7 +85,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation>Bildgenerator</translation>
+        <translation>Генератор зображень</translation>
     </message>
     <message>
         <source>Face</source>
@@ -98,79 +98,79 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>- Properties -</source>
-        <translation>- Eigenschaften -</translation>
+        <translation>- Особливості -</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation>Колір</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>use Gradient</source>
-        <translation>Verlauf verwenden</translation>
+        <translation>Історія використання</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="132"/>
         <source>sample text</source>
-        <translation>Beispieltext</translation>
+        <translation>Приклад тексту</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="139"/>
         <source>Font</source>
-        <translation>Schriftart</translation>
+        <translation>Шрифт</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="146"/>
         <source>Background</source>
-        <translation>Hintergrund</translation>
+        <translation>Передумови</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="172"/>
         <source>big Sliders</source>
-        <translation>große FA</translation>
+        <translation>великі слайдери</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="202"/>
         <source>- Face -</source>
-        <translation>- Größe -</translation>
+        <translation>- Розмір -</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="249"/>
         <source>- Sliders -</source>
-        <translation>- Fortschritts-Anzeige -</translation>
+        <translation>- Індикатор прогресу -</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="371"/>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="390"/>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation>Вихід</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="395"/>
         <location filename="../mainwindow.ui" line="410"/>
         <source>Test</source>
-        <translation>Test</translation>
+        <translation>Тест</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="400"/>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation>Відкрито</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="405"/>
         <source>New</source>
-        <translation>Erstellen</translation>
+        <translation>Створити</translation>
     </message>
     <message>
         <source>left Hour</source>
@@ -211,12 +211,12 @@
     <message>
         <location filename="../mainwindow.ui" line="307"/>
         <source>Power</source>
-        <translation>Akku</translation>
+        <translation>Батарея</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="300"/>
         <source>Steps</source>
-        <translation>Schritte</translation>
+        <translation>Кроки</translation>
     </message>
     <message>
         <source>Pulse</source>
@@ -333,48 +333,48 @@
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Select Background Color</source>
-        <translation>wähle Hintergrundfarbe</translation>
+        <translation>вибрати колір фону</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select first Foreground Color</source>
-        <translation>wähle Vordergrundfarbe (1)</translation>
+        <translation>вибрати колір переднього плану (1)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="111"/>
         <source>Select second Foreground Color</source>
-        <translation>wähle Vordergrundfarbe (2)</translation>
+        <translation>вибрати колір переднього плану (2)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="125"/>
         <source>Select Font</source>
-        <translation>wähle Schriftart</translation>
+        <translation>вибрати шрифт</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="144"/>
         <source>Open Project</source>
-        <translation>Projekt öffnen</translation>
+        <translation>Відкритий проект</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="154"/>
         <location filename="../mainwindow.cpp" line="179"/>
         <source>FaceBuilder - %1</source>
-        <translation>Bildgenerator - %1</translation>
+        <translation>Генератор зображень - %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="161"/>
         <source>Open File</source>
-        <translation>öffne Datei</translation>
+        <translation>відкрити файл</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="163"/>
         <source>Text files (*.txt)</source>
-        <translation>Text-Datei (*.txt)</translation>
+        <translation>Текстовий файл (*.txt)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="220"/>
         <source>Save Preview</source>
-        <translation>speichere Vorschau</translation>
+        <translation>Зберегти попередній перегляд</translation>
     </message>
     <message>
         <source>background</source>
@@ -553,212 +553,212 @@
     <message>
         <location filename="../watchface.cpp" line="199"/>
         <source>background</source>
-        <translation>Hintergrund</translation>
+        <translation>Передумови</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="213"/>
         <source>left hour</source>
-        <translation>linke Stunde</translation>
+        <translation>ліва година</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="227"/>
         <source>right hour</source>
-        <translation>rechte Stunde</translation>
+        <translation>правильна година</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="241"/>
         <source>left minute</source>
-        <translation>linke Minute</translation>
+        <translation>Ліва хвилина</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="255"/>
         <source>right minute</source>
-        <translation>rechte Minute</translation>
+        <translation>Саме в цю хвилину</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="269"/>
         <source>left day of month</source>
-        <translation>linker Tag des Monats</translation>
+        <translation>Лівий день місяця</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="283"/>
         <source>right day of month</source>
-        <translation>rechter Tag des Monats</translation>
+        <translation>потрібний день місяця</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="297"/>
         <source>month</source>
-        <translation>Monat</translation>
+        <translation>Місяць</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="311"/>
         <source>day of week</source>
-        <translation>Wochentag</translation>
+        <translation>Будний день</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="325"/>
         <source>temperature</source>
-        <translation>Temperatur</translation>
+        <translation>Температура</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="339"/>
         <source>power</source>
-        <translation>Akku</translation>
+        <translation>Батарея</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="353"/>
         <source>steps</source>
-        <translation>Schritte</translation>
+        <translation>Кроки</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="367"/>
         <source>pulse</source>
-        <translation>Puls</translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="381"/>
         <source>calories</source>
-        <translation>Kalorien</translation>
+        <translation>Калорії</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="395"/>
         <source>rain</source>
-        <translation>Regen</translation>
+        <translation>Дощ</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="409"/>
         <source>symbol power</source>
-        <translation>Symbol Akku</translation>
+        <translation>Батарея символів</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="423"/>
         <source>symbol steps</source>
-        <translation>Symbol Schritte</translation>
+        <translation>Символ Кроки</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="437"/>
         <source>symbol pulse</source>
-        <translation>Symbol Puls</translation>
+        <translation>Імпульс символу</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="451"/>
         <source>symbol calories</source>
-        <translation>Symbol Kalorien</translation>
+        <translation>Символ калорій</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="465"/>
         <source>symbol rain</source>
-        <translation>Symbol Regen</translation>
+        <translation>Символ дощу</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="479"/>
         <source>symbol weather</source>
-        <translation>Symbol Wetter</translation>
+        <translation>Символ погоди</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="493"/>
         <source>gauge power</source>
-        <translation>Akku-Fortschritt</translation>
+        <translation>потужність колії</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="507"/>
         <source>gauge steps</source>
-        <translation>Schritt-Fortschritt</translation>
+        <translation>сходинки колії</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="37"/>
         <source>January</source>
-        <translation>Januar</translation>
+        <translation>січень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="38"/>
         <source>February</source>
-        <translation>Februar</translation>
+        <translation>лютий</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="39"/>
         <source>March</source>
-        <translation>März</translation>
+        <translation>Березень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="40"/>
         <source>April</source>
-        <translation>April</translation>
+        <translation>квітень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="41"/>
         <source>May</source>
-        <translation>Mai</translation>
+        <translation>травень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="42"/>
         <source>June</source>
-        <translation>Juni</translation>
+        <translation>червень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="43"/>
         <source>July</source>
-        <translation>Juli</translation>
+        <translation>липень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="44"/>
         <source>August</source>
-        <translation>August</translation>
+        <translation>серпень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="45"/>
         <source>September</source>
-        <translation>September</translation>
+        <translation>вересень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="46"/>
         <source>October</source>
-        <translation>Oktober</translation>
+        <translation>жовтень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="47"/>
         <source>November</source>
-        <translation>November</translation>
+        <translation>листопад</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="48"/>
         <source>December</source>
-        <translation>Dezember</translation>
+        <translation>грудень</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="16"/>
         <source>Monday</source>
-        <translation>Montag</translation>
+        <translation>Понеділок</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="17"/>
         <source>Tuesday</source>
-        <translation>Dienstag</translation>
+        <translation>Вівторок</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="18"/>
         <source>Wednesday</source>
-        <translation>Mittwoch</translation>
+        <translation>Середа</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="19"/>
         <source>Thursday</source>
-        <translation>Donnerstag</translation>
+        <translation>Четвер</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="20"/>
         <source>Friday</source>
-        <translation>Freitag</translation>
+        <translation>П&apos;ятниця</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="21"/>
         <source>Saturday</source>
-        <translation>Samstag</translation>
+        <translation>Субота</translation>
     </message>
     <message>
         <location filename="../watchface.cpp" line="22"/>
         <source>Sunday</source>
-        <translation>Sonntag</translation>
+        <translation>Неділя</translation>
     </message>
 </context>
 </TS>
