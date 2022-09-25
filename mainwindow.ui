@@ -375,7 +375,6 @@
     <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
-    <addaction name="actionTest_2"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>

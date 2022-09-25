@@ -58,7 +58,7 @@ MainWindow::MainWindow(const QString& symbolBase, QWidget *parent)
   connect(ui->spAngle, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::angleChanged);
   connect(ui->edSample, &QLineEdit::textChanged, this, &MainWindow::sampleChanged);
   //TODO:
-  connect(ui->actionTest_2, &QAction::triggered, this, &MainWindow::test);
+//  connect(ui->actionTest_2, &QAction::triggered, this, &MainWindow::test);
   }
 
 
