@@ -15,6 +15,7 @@ linux application to assist in creation of all the needed images for a watchface
 ## build
 - this project uses qt framework with qmake as build system
 - either use QtCreator or build it manually like this:
+
         git clone https://github.com/DjangoReinhard/Watchface_ImageCreator.git
         cd Watchface_ImageCreator
         mkdir build
@@ -24,6 +25,7 @@ linux application to assist in creation of all the needed images for a watchface
 
 ### execute
 - dive into the build directory and execute:
+
         ./FaceBuilder         
 
 ## localization
