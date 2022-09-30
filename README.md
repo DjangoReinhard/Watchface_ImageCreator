@@ -1,5 +1,5 @@
 # Watchface_ImageCreator
-application to assist in creation of all the needed images for a watchface
+linux application to assist in creation of all the needed images for a watchface
 
 ![Preview](sample/WFCreator01.png)
 
@@ -13,7 +13,18 @@ application to assist in creation of all the needed images for a watchface
 - when reopening a project, select "**open**" from main menu and select the "*watchface-pre.txt*" file written at last save.
 
 ## build
-        this project uses qt framework with qmake as build system.
+- this project uses qt framework with qmake as build system
+- either use QtCreator or build it manually like this:
+        git clone https://github.com/DjangoReinhard/Watchface_ImageCreator.git
+        cd Watchface_ImageCreator
+        mkdir build
+        cd build
+        qmake ../FaceBuilder.pro
+        make
+
+### execute
+- dive into the build directory and execute:
+        ./FaceBuilder         
 
 ## localization
 - english is default language
