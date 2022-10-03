@@ -1,7 +1,7 @@
 # Watchface_ImageCreator
 linux application to assist in creation of all the needed images for a watchface
 
-![Preview](sample/WFCreator01.png)
+![Preview](sample/WFCreator02.jpg)
 
 ## usage
 - to start, select "**new**" from main menu and select an (empty) directory
